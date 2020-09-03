@@ -5,10 +5,11 @@ class PostsController < ApplicationController
   end
 
   def create
-    Post.create(content: params[:detail])
-    #detaol はビューファイindex.htmlに書いてあるtextfieldの後ろ。textフィールドに入力された値をdetailと紐付けてparamsで取得。
+    post = Post.create(content: params[:content], checked: false)
+    #:content はビューファイルindex.htmlに書いてあるtextfieldの後ろ。textフィールドに入力された値をcontentと紐付けてparamsで取得。
     #content: は、マイグレーションファイルで決めたカラム名のcontent。IDとかcontent とかcreated_atとかある内のcontent だけとってるという意味
-    redirect_to action: :index
+    #checked: falseはクリエイト時点では未読のため
+    render json:{ post: post }
   end
 
   def checked
